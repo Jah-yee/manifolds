@@ -16,7 +16,7 @@ def manifold_muon(W, G, eta=0.1, alpha=0.01, steps=100, tol=1e-6):
         # Update the candidate direction A
         A = msign(G + 2 * W @ Lambda)
         # Measure deviation of A from the tangent space:
-        H = W.T @ A + A.T @ W
+        H = eta * (W.T @ A + A.T @ W)
         # Check the stopping criterion
         if torch.norm(H) / math.sqrt(H.numel()) < tol:
             break
